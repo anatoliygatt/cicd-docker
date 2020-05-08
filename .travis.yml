@@ -1,0 +1,8 @@
+language: generic
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t cicd-docker/api ./api/Dockerfile ./api
+script:
+  - docker run cicd-docker/api npm test
