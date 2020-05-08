@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`queries should return viewer details 1`] = `
+Object {
+  "viewer": Object {
+    "firstName": "Anatoliy",
+    "id": "5c0e3aad39c4c3481c0b8743",
+    "lastName": "Gatt",
+  },
+}
+`;
