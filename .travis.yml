@@ -7,4 +7,5 @@ before_install:
 script:
   - docker run anatoliygatt/cicd-docker-api-test npm test
 after_success:
+  - chmod +x ./publish_containers.sh
   - ./publish_containers.sh
