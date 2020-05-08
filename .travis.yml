@@ -3,6 +3,12 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t cicd-docker/api -f ./api/Dockerfile ./api
+  - docker build -t anatoliygatt/cicd-docker-api-test ./api
 script:
-  - docker run cicd-docker/api npm test
+  - docker run anatoliygatt/cicd-docker-api-test npm test
+after_success:
+  - docker build -t anatoliygatt/cicd-docker-nginx ./nginx
+  - docker build -t anatoliygatt/cicd-docker-api ./api
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push anatoliygatt/cicd-docker-nginx
+  - docker push anatoliygatt/cicd-docker-api
