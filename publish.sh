@@ -5,4 +5,5 @@ if [ ! -z "${TRAVIS_TAG}" ]; then
   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   docker push anatoliygatt/cicd-docker-nginx
   docker push anatoliygatt/cicd-docker-api
+  docker logout
 fi
