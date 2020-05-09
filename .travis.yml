@@ -1,5 +1,6 @@
-language: generic
-sudo: required
+language: minimal
+os: linux
+dist: xenial
 services:
   - docker
 before_install:
