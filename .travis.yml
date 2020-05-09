@@ -6,8 +6,5 @@ before_install:
   - docker build -t anatoliygatt/cicd-docker-api-test ./api
 script:
   - docker run anatoliygatt/cicd-docker-api-test npm test
-deploy:
-  provider: script
-  script: ./deploy.sh
-  on:
-    tags: true
+after_success:
+  - ./publish.sh

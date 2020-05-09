@@ -2,9 +2,7 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
+    build: ./nginx
     restart: always
     depends_on:
       - api
@@ -12,9 +10,7 @@ services:
       - "3000:80"
   api:
     container_name: api
-    build:
-      dockerfile: Dockerfile
-      context: ./api
+    build: ./api
     volumes:
       - /app/node_modules
       - ./api:/app
