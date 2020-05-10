@@ -10,3 +10,15 @@ script:
   - docker run anatoliygatt/cicd-docker-api-test npm test
 after_success:
   - ./publish.sh
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: eu-west-2
+  app: cicd-docker
+  env: cicd-docker-env
+  bucket_name: elasticbeanstalk-eu-west-2-271877721587
+  bucket_path: cicd-docker
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  on:
+    tags: true
