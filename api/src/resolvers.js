@@ -4,6 +4,7 @@ const resolvers = {
       id,
       firstName: "Anatoliy",
       lastName: "Gatt",
+      occupation: "Software Engineer",
     }),
   },
 };
