@@ -7,12 +7,14 @@ const resolvers = {
       occupation: "Software Engineer",
     }),
     values: async (_, __, { pgClient }) => {
+      await pgClient.query("CREATE TABLE IF NOT EXISTS values (number INT)");
       const values = await pgClient.query("SELECT * from values");
       return values.rows.map(({ number }) => number);
     },
   },
   Mutation: {
     addValue: async (_, { value }, { pgClient }) => {
+      await pgClient.query("CREATE TABLE IF NOT EXISTS values (number INT)");
       await pgClient.query("INSERT INTO values(number) VALUES($1)", [value]);
       return value;
     },
