@@ -10,6 +10,11 @@ const typeDefs = gql`
 
   type Query {
     viewer(id: ID!): User
+    values: [Int!]!
+  }
+
+  type Mutation {
+    addValue(value: Int!): Int
   }
 `;
 

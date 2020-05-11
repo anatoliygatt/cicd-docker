@@ -1,9 +1,22 @@
 const express = require("express");
+const { Pool } = require("pg");
 const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 
 const app = express();
+
+const pgClient = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+});
+
+pgClient
+  .query("CREATE TABLE IF NOT EXISTS values (number INT)")
+  .catch((err) => console.log(err));
 
 app.set("port", process.env.PORT || 3000);
 
@@ -12,6 +25,9 @@ const server = new ApolloServer({
   resolvers,
   playground: true,
   introspection: true,
+  context: () => ({
+    pgClient,
+  }),
 });
 
 server.applyMiddleware({ app });
