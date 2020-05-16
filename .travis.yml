@@ -4,21 +4,15 @@ os: linux
 dist: xenial
 services:
   - docker
+env:
+  global:
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
   - docker build -t anatoliygatt/cicd-docker-api-test ./api
 script:
   - docker run anatoliygatt/cicd-docker-api-test npm test
-after_success:
-  - ./publish.sh
 deploy:
-  edge: true
-  provider: elasticbeanstalk
-  region: eu-west-2
-  app: cicd-docker
-  env: CicdDocker-env
-  bucket_name: elasticbeanstalk-eu-west-2-271877721587
-  bucket_path: cicd-docker
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  provider: script
+  script: ./scripts/deploy.sh
   on:
     tags: true
