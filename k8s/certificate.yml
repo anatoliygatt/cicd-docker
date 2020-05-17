@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: dockerized-xyz-tls
+spec:
+  secretName: dockerized-xyz
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: dockerized.xyz
+  dnsNames:
+    - dockerized.xyz
+    - www.dockerized.xyz
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - dockerized.xyz
+          - www.dockerized.xyz
