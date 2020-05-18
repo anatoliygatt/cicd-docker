@@ -17,7 +17,10 @@ spec:
           image: anatoliygatt/cicd-docker-api
           env:
             - name: PGHOST
-              value: postgres-cluster-ip-service
+              valueFrom:
+                secretKeyRef:
+                  name: pghost
+                  key: PGHOST
             - name: PGPORT
               value: "5432"
             - name: PGDATABASE
