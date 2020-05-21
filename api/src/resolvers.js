@@ -4,7 +4,7 @@ const resolvers = {
       id,
       firstName: "Anatoliy",
       lastName: "Gatt",
-      occupation: "Software Engineer",
+      occupation: "Frontend Software Engineer",
     }),
     values: async (_, __, { pgClient }) => {
       const values = await pgClient.query("SELECT * from values");
